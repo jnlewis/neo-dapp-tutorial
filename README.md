@@ -103,7 +103,7 @@ Smart contracts on NEO supports programmable logic and immutable data storage. I
 The next section will guide you through the steps to create our Book Store Dapp, which consists of the API, Off-Chain Database, and Smart Contract.
 
 ## Application Development
-#### Creating the smart contract
+#### Creating the Blockchain Smart Contract
 Lets start by first creating the smart contract for our book store dapp.
 
 1. Open Visual Studio. Go to File > New > Project. On the left panel, select C# > NeoContract. Check "Create directory for solution" and fill in the Name and Solution Name as below, then click OK.
