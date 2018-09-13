@@ -782,6 +782,6 @@ As with any software, thorough testing is a must before release. In this tutoria
 You may have noticed that the tutorial did not include any exception logging. This is an important necessity in any production application. You may use any logging mechanism that helps you detect and troubleshoot errors. Personally, I use NLog for most of my C# projects.
 
 ## Conclusion
-We have covered designing the architecture of a dApp, creating and deploying smart contracts, and integrating it with our app's API, and implementing a supporting off-chain database. There is much to learn when it comes to decentralize application development, and what this tutorial has covered is just the surface. Hopefully this tutorial was a good demonstration on one way to build a dApp on NEO blockchain.
+We have covered designing the architecture of a dApp, creating and deploying smart contracts, integrating it with the dApp API, and implementing a supporting off-chain database, as well as unit testing our app. There is much to learn when it comes to decentralize application development, and what this tutorial has covered is really just the surface. Hopefully this tutorial was a good demonstration on one way to build a dApp on NEO blockchain.
 
 [View Complete Source Code](https://github.com/jnlewis/neo-dapp-tutorial/tree/master/Sample/BookStoreApp)
