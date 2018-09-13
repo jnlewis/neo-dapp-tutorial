@@ -9,20 +9,20 @@ The reason why I used this as an example is because it includes the basic buildi
 
 ## Contents
 * [Functional Requirements](#functional-requirements)
-* [Tools & Technologies](#tools-and-technologies)
+* [Tools & Technologies](#development-tools--technologies)
 * [Getting Started](#getting-started)
-    * [Configuring NEO Smart Contract Development Environment](#configuring-neo)
-    * [Preparing a Blockchain Test Environment](#preparing-blockchain)
-* [Architecture Overview](#preparing-blockchain)
-* [Application Development](#preparing-blockchain)
-    * [Creating the Blockchain Smart Contract](#preparing-blockchain)
-    * [Deploying the Smart Contract](#preparing-blockchain)
-    * [Creating the Web API](#preparing-blockchain)
-    * [Implementing the Off-Chain Database](#preparing-blockchain)
-    * [Integrating with the Smart Contract](#preparing-blockchain)
-* [Testing The Project](#preparing-blockchain)
-* [Production Readiness](#preparing-blockchain)
-* [Conclusion](#preparing-blockchain)
+    * [Configuring NEO Smart Contract Development Environment](#configuring-neo-smart-contract-development-environment)
+    * [Preparing a Blockchain Test Environment](#preparing-a-blockchain-test-environment)
+* [Architecture Overview](#architecture-overview)
+* [Application Development](#application-development)
+    * [Creating the Blockchain Smart Contract](#creating-the-blockchain-smart-contract)
+    * [Deploying the Smart Contract](#deploying-the-smart-contract)
+    * [Creating the Web API](#creating-the-api)
+    * [Implementing the Off-Chain Database](#implementing-the-off-chain-database)
+    * [Integrating with the Smart Contract](#integrating-with-the-smart-contract)
+* [Testing The Project](#testing-the-project)
+* [Production Readiness](#production-readiness)
+* [Conclusion](#conclusion)
 
 ## Functional Requirements
 Develop a decentralized book store that lets authors add books on the store which can be sold directly to customers. The book store will consist of the following features:
