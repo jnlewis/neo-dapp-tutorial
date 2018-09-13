@@ -1,9 +1,9 @@
 # Tutorial: Designing and Developing a DApp on NEO
 **A detailed walkthrough on creating a real world decentralized application.**
 
-This tutorial will walk you through building a decentralized app on the NEO blockchain. The tutorial will use C# as example, but once you've grasps the core concept, this project can be written in any other language you prefer. The example project we are using is a book store that lets authors add books on the store which can be sold directly to customers. 
+This tutorial will walk you through building a decentralized app on the NEO blockchain. The tutorial will use C# as example, but once you've grasp the core concept, this project can be written in any other language you prefer. The example project we are using is a book store that lets authors add books on the store which can be sold directly to customers. 
 
-The reason why I used this as an example is because it includes the basic building blocks of any data oriented software: retrieving, creating, updating and deleting data. Albeit, this guide will be a long read, but you will definately learn a lot more by building a real world app as compared to a hello world example. So grab a drink, put on some music if you'd like, and let's get started.
+The reason why I used this as an example is because it includes the basic building blocks of any data oriented software: retrieving, creating, updating and deleting data. Albeit, this guide will be a long read, but you will definitely learn a lot more by building a real world app as compared to a hello world example. So grab a drink, put on some music if you'd like, and let's get started.
 
 [View Source Code](https://github.com/jnlewis/neo-dapp-tutorial/tree/master/Sample/BookStoreApp)
 
@@ -81,14 +81,14 @@ The following diagram illustrates the high level components for our Dapp.
 Let’s understand the above diagram:
 
 1. **Mobile/Desktop/Web Apps**
-These componenets make up the UI layer which will interact with the API via HTTP requests. The front-end apps shown here are illustration on what components a Dapp can consist of. They and are not covered in the tutorial for the reason that front-end apps are not decentralised in nature and rely on the API to interact with the blockchain. Also, certain Dapps may not even have a UI.
+These components make up the UI layer which will interact with the API via HTTP requests. The front-end apps shown here are illustration on what components a Dapp can consist of. They are not covered in the tutorial for the reason that front-end apps are not decentralized in nature and rely on the API to interact with the blockchain. Also, certain Dapps may not even have a UI.
 
 2. **App Web API**
 The API will expose the core functionality of our Dapp and is where most of the implementation will reside. Developing our Dapp as an API gives us the advantage of having support across front-end platforms and allow for easier maintenance. You can have your front-end on mobile, desktop or web and interact with the dapp API using conventional HTTP requests.
 In this tutorial, we’ll use ASP.NET Web API 2 to develop the API. You can use any language or framework you are familiar with once you learn the basic concepts of designing a Dapp.
 
 3. **Off-Chain Database**
-The off-chain database acts as a secondary low-cost storage to the blockchain. Off-chain data can be used for fast and cost-free retrieval, and also enables instant transaction commits while in waiting for blockchain commit. Note that the off-chain database is in no way replacing the blockchain - that would defeat the purpose of a dapp, which is to achieve decentralisation.
+The off-chain database acts as a secondary low-cost storage to the blockchain. Off-chain data can be used for fast and cost-free retrieval, and also enables instant transaction commits while in waiting for blockchain commit. Note that the off-chain database is in no way replacing the blockchain - that would defeat the purpose of a dapp, which is to achieve decentralization.
 For this tutorial, we'll use the same key-value storage used in Neo as our database; Google's open-source LevelDB.
 
 4. **Transaction Queue**
@@ -97,14 +97,14 @@ The queue will not be covered in this tutorial. It is here as an illustration of
 
 5. **App Smart Contract**
 The smart contract is the part of your Dapp that makes it truly decentralized. Essentially, the smart contract is a set of code that runs on the blockchain. 
-Smart contracts on NEO supports programmable logic and immutable data storage. In order to to store data on the blockchain, we will need to deploy a smart contract developed specifically for our book store app.
+Smart contracts on NEO supports programmable logic and immutable data storage. In order to store data on the blockchain, we will need to deploy a smart contract developed specifically for our book store app.
 
 
 The next section will guide you through the steps to create our Book Store Dapp, which consists of the API, Off-Chain Database, and Smart Contract.
 
 ## Application Development
 #### Creating the Blockchain Smart Contract
-Lets start by first creating the smart contract for our book store dapp.
+Let's start by first creating the smart contract for our book store dapp.
 
 1. Open Visual Studio. Go to File > New > Project. On the left panel, select C# > NeoContract. Check "Create directory for solution" and fill in the Name and Solution Name as below, then click OK.
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/vs-new-neocontract-project.png)
@@ -218,7 +218,7 @@ namespace BookStore.SmartContracts
 
 6. This code is a modification of the official smart contract ICO template. I have removed some code that we won’t be using in this tutorial. See the full template if you’d like to learn more on ICO implementation. [SmartContract ICO Template](https://github.com/neo-project/examples-csharp/blob/master/ICO_Template/ICO_Template.cs)
 
-7. Let's implement our contract methods. Add the following method calls in our main method by replacing the line Replace the following code block in the comment line `//TODO: Add dapp methods calls here`. This will redirect calls to our contract to the appropriate sub routine. 
+7. Let's implement our contract methods. Add the following method calls in our main method by replacing the comment line `//TODO: Add dapp methods calls here`. This will redirect calls to our contract to the appropriate sub routine. 
 
 ```
 if (operation == "addBook")
@@ -550,7 +550,7 @@ public HttpResponseMessage PurchaseBook(OrderRequest value)
     return Request.CreateResponse(HttpStatusCode.OK);
 }
 ```
-6. We now have a book store app that can interact with it's own data store. Next, we'll decentralize our app by intergrating with the smart contract we have created earlier.
+6. We now have a book store app that can interact with its own data store. Next, we'll decentralize our app by integrating with the smart contract we have created earlier.
 
 #### Integrating with the Smart Contract
 We are almost there, our API can now function using its own storage. Now all that's left is to integrate the API with the smart contract on the blockchain. 
@@ -637,7 +637,7 @@ Blockchain.InvokeScript("purchaseBook",
 
 Our API is now complete! Build the project and prepare for testing in the next section.
 
-## Testing The Project
+## Testing the Project
 Finally, we are now ready to test the project.
 
 *Note: If you are following the agile development principles of test-driven development (TDD) when developing your dapp, this would be the first project created in the solution.*
@@ -764,16 +764,16 @@ TestMethod_AddBook, TestMethod_UpdateBook, TestMethod_PurchaseBook, TestMethod_D
 10. Finish.
 
 ## Production Readiness
-We have come a long way in creating our Book Store dapp. However, there are several improvements that should be taken care of before lauching the dapp to production or beta test. Here are some suggestions:
+We have come a long way in creating our Book Store dapp. However, there are several improvements that should be taken care of before launching the dapp to production or beta test. Here are some suggestions:
 
 * Transaction Queues
 As mentioned at the beginning of the tutorial, a scalable and responsive dapp must respond to client requests in a timely manner. This is where a queuing system can help by allowing immediate response to clients while transactions are queued to be eventually committed.
 
 * Consistency Handling
-Consistency between the off-chain and blockchain should be properly maintained. The off-chain database can include a rollback mechanism if a transction is unable to commit on the blockchain. There shouldn't be a case where a transaction is permanently on the off-chain database but not on the blockchain, unless it is by design.
+Consistency between the off-chain and blockchain should be properly maintained. The off-chain database can include a rollback mechanism if a transaction is unable to commit on the blockchain. There shouldn't be a case where a transaction is permanently on the off-chain database but not on the blockchain, unless it is by design.
  
 * Request Validation
-As always, it is best to validate any requests to avoid unexpected errors or worse; corrupted data. In this case, we can improve the reliability of our dapp by validating the parameters sent to the API and the smart contract, before commiting any transaction. An example of this would be checking for null values. Note that this kind of validation is different from business rules verification like checking wallet balance before making purchsae.
+As always, it is best to validate any requests to avoid unexpected errors or worse; corrupted data. In this case, we can improve the reliability of our dapp by validating the parameters sent to the API and the smart contract, before committing any transaction. An example of this would be checking for null values. Note that this kind of validation is different from business rules verification like checking wallet balance before making purchase.
 
 * Testing
 As with any software, thorough testing is a must before release. In this tutorial, we have used the unit test feature in Visual Studio. While this is an efficient way to perform test runs during development, it is not a complete end-to-end test. This is because the unit test triggers our controller method directly without going through http requests. Once development is done, host the API on IIS and perform an end-to-end tests using actual http requests. A useful and free tool to perform API tests would be [Postman](https://www.getpostman.com/).
