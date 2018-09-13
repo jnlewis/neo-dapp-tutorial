@@ -1,4 +1,4 @@
-# Tutorial: Designing and Developing a Dapp on NEO
+# Tutorial: Designing and Developing a DApp on NEO
 **A detailed walkthrough on creating a real world decentralized application.**
 
 This tutorial will walk you through building a decentralized app on the NEO blockchain. The tutorial will use C# as example, but once you've grasps the core concept, this project can be written in any other language you prefer. The example project we are using is a book store that lets authors add books on the store which can be sold directly to customers. 
