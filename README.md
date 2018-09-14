@@ -760,7 +760,6 @@ From the menu go to `Test > Test Settings > Default Processor Architecture > x64
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/unittest-3.png)
 
 9. Right-click > Run Selected Tests for each test in the following sequence: TestMethod_AddBook, TestMethod_UpdateBook, TestMethod_PurchaseBook, TestMethod_DeleteBook
-
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/unittest-4.png)
 
 10. Finish.
@@ -768,19 +767,19 @@ From the menu go to `Test > Test Settings > Default Processor Architecture > x64
 ## Production Readiness
 We have come a long way in creating our Book Store dapp. However, there are several improvements that should be taken care of before launching the dapp to production or beta test. Here are some suggestions:
 
-* Transaction Queues
+* **Transaction Queues:**
 As mentioned at the beginning of the tutorial, a scalable and responsive dapp must respond to client requests in a timely manner. This is where a queuing system can help by allowing immediate response to clients while transactions are queued to be eventually committed.
 
-* Consistency Handling
+* **Consistency Handling:**
 Consistency between the off-chain and blockchain should be properly maintained. The off-chain database can include a rollback mechanism if a transaction is unable to commit on the blockchain. There shouldn't be a case where a transaction is permanently on the off-chain database but not on the blockchain, unless it is by design.
  
-* Request Validation
+* **Request Validation:**
 As always, it is best to validate any requests to avoid unexpected errors or worse; corrupted data. In this case, we can improve the reliability of our dapp by validating the parameters sent to the API and the smart contract, before committing any transaction. An example of this would be checking for null values. Note that this kind of validation is different from business rules verification like checking wallet balance before making purchase.
 
-* Testing
+* **Testing:**
 As with any software, thorough testing is a must before release. In this tutorial, we have used the unit test feature in Visual Studio. While this is an efficient way to perform test runs during development, it is not a complete end-to-end test. This is because the unit test triggers our controller method directly without going through http requests. Once development is done, host the API on IIS and perform an end-to-end tests using actual http requests. A useful and free tool to perform API tests would be [Postman](https://www.getpostman.com/).
 
-* Logging
+* **Logging:**
 You may have noticed that the tutorial did not include any exception logging. This is an important necessity in any production application. You may use any logging mechanism that helps you detect and troubleshoot errors. Personally, I use NLog for most of my C# projects.
 
 ## Conclusion
