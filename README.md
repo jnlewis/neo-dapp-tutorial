@@ -759,8 +759,8 @@ From the menu go to `Test > Test Settings > Default Processor Architecture > x64
 8. Done. We are now ready to run the tests. In Visual Studio menu, go to `Test > Windows > Test Explorer`
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/unittest-3.png)
 
-9. Right-click > Run Selected Tests for each test in the following sequence:
-TestMethod_AddBook, TestMethod_UpdateBook, TestMethod_PurchaseBook, TestMethod_DeleteBook
+9. Right-click > Run Selected Tests for each test in the following sequence: TestMethod_AddBook, TestMethod_UpdateBook, TestMethod_PurchaseBook, TestMethod_DeleteBook
+
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/unittest-4.png)
 
 10. Finish.
