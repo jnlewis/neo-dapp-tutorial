@@ -5,8 +5,6 @@ This tutorial will walk you through building a decentralized app on the NEO bloc
 
 The reason why I used this as an example is because it includes the basic building blocks of any data oriented software: retrieving, creating, updating and deleting data. Albeit, this guide will be a long read, but you will definitely learn a lot more by building a real world app as compared to a hello world example. So grab a drink, put on some music if you'd like, and let's get started.
 
-[View Source Code](https://github.com/jnlewis/neo-dapp-tutorial/tree/master/Sample/BookStoreApp)
-
 ## Contents
 * [Functional Requirements](#functional-requirements)
 * [Tools & Technologies](#development-tools--technologies)
@@ -31,6 +29,8 @@ Develop a decentralized book store that lets authors add books on the store whic
 * Authors can update books info.
 * Authors can remove their own books.
 * Customers can place order on books.
+
+[View Source Code](https://github.com/jnlewis/neo-dapp-tutorial/tree/master/Sample/BookStoreApp)
 
 ## Development Tools & Technologies
 
