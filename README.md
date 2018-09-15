@@ -316,7 +316,7 @@ Lets briefly understand the above code:
 * Storage.Delete is used for deleting an existing data by the given key.
 * Keys must uniquely identify a particular information. In our implementation, we have prefixed our keys with Class and Property. As an example, the key "Book_Title_123" refers to the title of a book for the book ID of 123.
 
-9. The final class file will look like this: [link in github]
+9. The final class file will look like this: [BookStoreContract.cs](https://github.com/jnlewis/neo-dapp-tutorial/blob/master/Sample/BookStoreApp/BookStore.SmartContracts/BookStoreContract.cs)
 
 #### Deploying the Smart Contract
 Now that our smart contract is ready, let's deploy it to the blockchain's testnet environment.
