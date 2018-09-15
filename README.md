@@ -120,7 +120,7 @@ Let's start by first creating the smart contract for our book store dapp.
 
 5. Now, go ahead and rename the Contract1.cs file to BookStoreContract.cs, then replace all contents in this file with the following code:
 
-```
+```c#
 using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
 using System.Numerics;
@@ -222,7 +222,7 @@ namespace BookStore.SmartContracts
 
 7. Let's implement our contract methods. Add the following method calls in our main method by replacing the comment line `//TODO: Add dapp methods calls here`. This will redirect calls to our contract to the appropriate sub routine. 
 
-```
+```c#
 if (operation == "addBook")
     return AddBook((byte[])args[0], (string)args[1], (string)args[2], (string)args[3], (BigInteger)args[4]);
 if (operation == "updateBook")
@@ -233,7 +233,7 @@ if (operation == "purchaseBook")
     return PurchaseBook((byte[])args[0], (string)args[1], (string)args[2]);
 ```
 8. Now we will implement each of our Dapp method. For each method, replace the line `//TODO: Implement` with the following codes:
-```
+```c#
 /*Replace in method: AddBook*/
 //Put data in storage
 Storage.Put(Storage.CurrentContext, Key("Book_OwnerAddress", bookId), ownerAddress);
@@ -243,7 +243,7 @@ Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
 Runtime.Log("AddBook: Successfully added book.");
 return true;
 ```
-```
+```c#
 /*Replace in method: UpdateBook*/
 //Validate book existence and owner address
 byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
@@ -265,7 +265,7 @@ Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
 Runtime.Log("UpdateBook: Successfully updated book.");
 return true;
 ```
-```
+```c#
 /*Replace in method: DeleteBook*/
 //Validate book existence and owner address
 byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
@@ -287,7 +287,7 @@ Storage.Delete(Storage.CurrentContext, Key("Book_Price", bookId));
 Runtime.Log("DeleteBook: Successfully deleted book.");
 return true;
 ```
-```
+```c#
 /*Replace in method: PurchaseBook*/
 //Get book owner
 byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
@@ -365,12 +365,12 @@ Note: Using the Empty template instead of API template keeps things simple and e
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/vs-solution-explorer.png)
 
 5. Open the WebApiConfig.cs file and add the following line just below the `config.MapHttpAttributeRoutes();` line. This will return our API responses in Json format.
-```
+```c#
 config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 ```
 
 6. Copy the following code and replace all content in the StoreController.cs file. We now have the outline of our Api controller.
-```
+```c#
 using System;
 using System.Net;
 using System.Net.Http;
@@ -446,7 +446,7 @@ Let's start implementing the Api methods in our controller. First, we'll need to
 1. In the BookStore.Api project, add the nuget package reference to LevelDB.NET:
 	`PM > Install-Package LevelDB.Net`
 2. Add the following code at the top of the StoreController.cs class, replacing the `//TODO: Add DB Configuration here` comment.
-```
+```c#
 #region DB Configuration
 private string dbFolder = "Data";
 private Options dbOptions = new Options() { CreateIfMissing = true, FilterPolicy = new BloomFilterPolicy(10) };
@@ -456,7 +456,7 @@ private Options dbOptions = new Options() { CreateIfMissing = true, FilterPolicy
 ```
 
 3. Add the following method at the bottom of the StoreController.cs class, replacing the `//TODO: Add Key() method here` comment. This is our helper method to create a unique key to store in database. Remember that LevelDB is a key-value store, so each key must uniquely identify our data.
-```
+```c#
 private string Key(string keyName, string property, string id)
 {
     return keyName + "_" + property + "_" + id;
@@ -470,7 +470,7 @@ private string Key(string keyName, string property, string id)
 
 5. Now that we have our database ready to use. Let's add in the code for retrieving and saving data in our off-chain. This is our implemented Api methods, you may copy and replace them in your code.
 
-```
+```c#
 [HttpGet]
 [Route("books/{bookId}")]
 public HttpResponseMessage GetBookInfo(string bookId)
@@ -570,14 +570,14 @@ There are several ways to invoke a smart contract on Neo. For this tutorial weâ€
 [Blockchain.cs](https://github.com/jnlewis/neo-dapp-tutorial/blob/master/Sample/BookStoreApp/BookStore.Api/Contract/Blockchain.cs)
 
 4. Fill in the wallet private key and the contract script hash in the class variables at the top of the class file. For the purpose of this tutorial, we are going to hardcode these values. However, when creating your actual Dapp, these should be in a configurable settings and best kept securely.
-```
+```c#
 //The private key of the wallet used to deploy the smart contract
 private static string privateKey = "";
 //Get this when deploying your contract to the blockchain
 private static string contractScriptHash = "";
 ```
 5. With the wrapper class complete, you can now invoke your smart contract from code like this:
-```
+```c#
 Blockchain.InvokeScript("updateBook",
     new object[] {
         value.OwnerAddress,
@@ -591,7 +591,7 @@ Blockchain.InvokeScript("updateBook",
 2. Add the following line at the top of the class
 `using BookStore.Api.Contract;`
 3. For each HttpPost method in the controller, replace the line `//TODO: Commit to blockchain` with the following codes:
-```
+```c#
 /*Replace in method: AddBook(BookRequest value)*/
 //Commit to blockchain
 Blockchain.InvokeScript("addBook",
@@ -602,7 +602,7 @@ Blockchain.InvokeScript("addBook",
         value.Book.Price
     });
 ```
-```
+```c#
 /*Replace in method: UpdateBook(BookRequest value)*/
 //Commit to blockchain
 Blockchain.InvokeScript("updateBook",
@@ -613,7 +613,7 @@ Blockchain.InvokeScript("updateBook",
         value.Book.Price
     });
 ```
-```
+```c#
 /*Replace in method: DeleteBook(BookRequest value)*/
 //Commit to blockchain
 Blockchain.InvokeScript("deleteBook",
@@ -622,7 +622,7 @@ Blockchain.InvokeScript("deleteBook",
         value.Book.BookId
     });
 ```
-```
+```c#
 /*Replace in method: PurchaseBook(OrderRequest value)*/
 //Commit to blockchain
 Blockchain.InvokeScript("purchaseBook",
@@ -659,7 +659,7 @@ Finally, we are now ready to test the project.
 5. Open the UnitTest1.cs file in the project from the Solution Explorer.
 
 6. Replace all code in the class with the following:
-```
+```c#
 using System;
 using BookStore.Api.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
