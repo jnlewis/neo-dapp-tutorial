@@ -68,7 +68,7 @@ You can request for GAS on the test net here:
 https://neo.org/Testnet/Create
 
 **INSTRUCTIONS: Setting up to use NEO test-net environment:**
-1. Download NEO-GUI and extract the files to a location of your choice, then navigate to the extracted folder.
+1. Download [NEO-GUI](https://neo.org/client) and extract the files to a location of your choice, then navigate to the extracted folder.
 2. Open the config.json and config.testnet.json files for edit. Copy all content from config.testnet.json and replace it in config.json, then save the config.json file. This will configure the client to connect to the testnet environment.
 ![alt text](https://raw.githubusercontent.com/jnlewis/neo-dapp-tutorial/master/Images/neo-gui-config.png)
 3. Double-click neo-gui.exe to run the client.
