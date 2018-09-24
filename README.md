@@ -54,16 +54,18 @@ Official Installation Guide: http://docs.neo.org/en-us/sc/quickstart/getting-sta
 #### Preparing a Blockchain Test Environment
 Before you get started, you should have a ready test environment in order for you to deploy and test your Dapp on the blockchain. You have two options here:
 
-1. Set up your own NEO local network on your machine.
+1. Set up your own NEO private network on your machine.
 2. Use the readily available NEO testnet environment.
 
-Option 1 gives you virtually unlimited GAS tokens, which is required to deploy your smart contract to the blockchain and for network fees on the blockchain. It is important to note that at the time of writing, a fee of 490 GAS is required to deploy your Dapp on NEO. This option is more difficult and will need a longer time to set up. If you’d like to explore option 1, the following guides are a good starting point:
+Option 1 (**Running NEO private net**) gives you virtually unlimited GAS tokens, which is required to deploy your smart contract to the blockchain and for network fees on the blockchain. It is important to note that at the time of writing, a fee of 490 GAS is required to deploy your Dapp on NEO. This is the recommended option for NEO development, but it will take some time to set up. If you’d like to explore option 1, the following guides are a good starting point:
 
 [Official NEO guide to set up private chain](http://docs.neo.org/en-us/network/private-chain.html)
 
-[Unofficial but helpful guide](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
+[Docket Private Network Container](https://hub.docker.com/r/cityofzion/neo-privatenet/)
 
-Option 2 (Using NEO testnet environment), which this tutorial will focus on, is a quick and easy way to get started. The downside is that you will need to request for GAS for test usage.
+[How to Run NEO Private Net (Unofficial guide)](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
+
+Option 2 (**Using NEO testnet environment**), which this tutorial will focus on, is a quick and easy way to get started. The downside is that you will need to request for GAS for test usage.
 You can request for GAS on the test net here:
 https://neo.org/Testnet/Create
 
