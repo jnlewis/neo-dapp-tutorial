@@ -63,7 +63,7 @@ Option 1 gives you virtually unlimited GAS tokens, which is required to deploy y
 
 [Unofficial but helpful guide](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
 
-Option 2, which this tutorial will focus on, is a quick and easy way to get started. The downside is that you will need to request for GAS for test usage.
+Option 2 (Using NEO testnet environment), which this tutorial will focus on, is a quick and easy way to get started. The downside is that you will need to request for GAS for test usage.
 You can request for GAS on the test net here:
 https://neo.org/Testnet/Create
 
@@ -232,84 +232,130 @@ if (operation == "deleteBook")
 if (operation == "purchaseBook")
     return PurchaseBook((byte[])args[0], (string)args[1], (string)args[2]);
 ```
-8. Now we will implement each of our Dapp method. For each method, replace the line `//TODO: Implement` with the following codes:
+8. Now we will implement each of our Dapp method. For each method, replace the line `//TODO: Add dapp methods here` with the following codes:
 ```c#
-/*Replace in method: AddBook*/
-//Put data in storage
-Storage.Put(Storage.CurrentContext, Key("Book_OwnerAddress", bookId), ownerAddress);
-Storage.Put(Storage.CurrentContext, Key("Book_Title", bookId), title);
-Storage.Put(Storage.CurrentContext, Key("Book_Author", bookId), author);
-Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
-Runtime.Log("AddBook: Successfully added book.");
-return true;
-```
-```c#
-/*Replace in method: UpdateBook*/
-//Validate book existence and owner address
-byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
-if (bookOwnerAddress != null)
+private static bool AddBook(byte[] ownerAddress, string bookId, string title, string author, BigInteger price)
 {
-    Runtime.Log("UpdateBook: Book not found.");
-    return false;
+    //Validate input
+    if (ownerAddress == null || title == null || author == null || price == null)
+    {
+        Runtime.Log("AddBook: One or more required parameter is not specified.");
+        return false;
+    }
+
+    //Put data in storage
+    Storage.Put(Storage.CurrentContext, Key("Book_OwnerAddress", bookId), ownerAddress);
+    Storage.Put(Storage.CurrentContext, Key("Book_Title", bookId), title);
+    Storage.Put(Storage.CurrentContext, Key("Book_Author", bookId), author);
+    Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
+
+    Runtime.Log("AddBook: Successfully added book.");
+
+    return true;
 }
-if (bookOwnerAddress.AsString() != ownerAddress.AsString())
+
+private static bool UpdateBook(byte[] ownerAddress, string bookId, string title, string author, BigInteger price)
 {
-    Runtime.Log("UpdateBook: Book is owned by a different owner.");
-    return false;
+    //Validate input
+    if (ownerAddress == null || title == null || author == null || price == null)
+    {
+        Runtime.Log("UpdateBook: One or more required parameter is not specified.");
+        return false;
+    }
+
+    //Validate book existence and owner address
+    byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
+    if (bookOwnerAddress != null)
+    {
+        Runtime.Log("UpdateBook: Book not found.");
+        return false;
+    }
+    if (bookOwnerAddress.AsString() != ownerAddress.AsString())
+    {
+        Runtime.Log("UpdateBook: Book is owned by a different owner.");
+        return false;
+    }
+
+    //Update data in storage
+    Storage.Put(Storage.CurrentContext, Key("Book_OwnerAddress", bookId), ownerAddress);
+    Storage.Put(Storage.CurrentContext, Key("Book_Title", bookId), title);
+    Storage.Put(Storage.CurrentContext, Key("Book_Author", bookId), author);
+    Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
+
+    Runtime.Log("UpdateBook: Successfully updated book.");
+
+    return true;
 }
-//Update data in storage
-Storage.Put(Storage.CurrentContext, Key("Book_OwnerAddress", bookId), ownerAddress);
-Storage.Put(Storage.CurrentContext, Key("Book_Title", bookId), title);
-Storage.Put(Storage.CurrentContext, Key("Book_Author", bookId), author);
-Storage.Put(Storage.CurrentContext, Key("Book_Price", bookId), price);
-Runtime.Log("UpdateBook: Successfully updated book.");
-return true;
-```
-```c#
-/*Replace in method: DeleteBook*/
-//Validate book existence and owner address
-byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
-if (bookOwnerAddress != null)
+
+private static bool DeleteBook(byte[] ownerAddress, string bookId)
 {
-    Runtime.Log("UpdateBook: Book not found.");
-    return false;
+    //Validate input
+    if (ownerAddress == null || bookId == null)
+    {
+        Runtime.Log("DeleteBook: One or more required parameter is not specified.");
+        return false;
+    }
+
+    //Validate book existence and owner address
+    byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
+    if (bookOwnerAddress != null)
+    {
+        Runtime.Log("UpdateBook: Book not found.");
+        return false;
+    }
+    if (bookOwnerAddress.AsString() != ownerAddress.AsString())
+    {
+        Runtime.Log("UpdateBook: Book is owned by a different owner.");
+        return false;
+    }
+
+    //Delete data in storage
+    Storage.Delete(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
+    Storage.Delete(Storage.CurrentContext, Key("Book_Title", bookId));
+    Storage.Delete(Storage.CurrentContext, Key("Book_Author", bookId));
+    Storage.Delete(Storage.CurrentContext, Key("Book_Price", bookId));
+
+    Runtime.Log("DeleteBook: Successfully deleted book.");
+
+    return true;
 }
-if (bookOwnerAddress.AsString() != ownerAddress.AsString())
+
+private static bool PurchaseBook(byte[] buyerAddress, string orderId, string bookId)
 {
-    Runtime.Log("UpdateBook: Book is owned by a different owner.");
-    return false;
+    //Validate input
+    if (buyerAddress == null || orderId == null || bookId == null)
+    {
+        Runtime.Log("PurchaseBook: One or more required parameter is not specified.");
+        return false;
+    }
+
+    //Get book owner
+    byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
+    if (bookOwnerAddress == null)
+    {
+        Runtime.Log("PurchaseBook: Book not found.");
+        return false;
+    }
+
+    //Check customer balance
+    BigInteger bookPrice = Storage.Get(Storage.CurrentContext, Key("Book_Price", bookId)).AsBigInteger();
+    if (BalanceOf(buyerAddress) < bookPrice)
+    {
+        Runtime.Log("PurchaseBook: Buyer has insufficient funds.");
+        return false;
+    }
+
+    //Transfer funds from customer account to event account
+    Transfer(buyerAddress, bookOwnerAddress, bookPrice);
+
+    //Update data in storage
+    Storage.Put(Storage.CurrentContext, Key("Purchase_BuyerAddress", orderId), buyerAddress);
+    Storage.Put(Storage.CurrentContext, Key("Purchase_BookId", orderId), bookId);
+
+    Runtime.Log("PurchaseBook: Successfully purchased book.");
+
+    return true;
 }
-//Delete data in storage
-Storage.Delete(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
-Storage.Delete(Storage.CurrentContext, Key("Book_Title", bookId));
-Storage.Delete(Storage.CurrentContext, Key("Book_Author", bookId));
-Storage.Delete(Storage.CurrentContext, Key("Book_Price", bookId));
-Runtime.Log("DeleteBook: Successfully deleted book.");
-return true;
-```
-```c#
-/*Replace in method: PurchaseBook*/
-//Get book owner
-byte[] bookOwnerAddress = Storage.Get(Storage.CurrentContext, Key("Book_OwnerAddress", bookId));
-if (bookOwnerAddress == null)
-{
-    Runtime.Log("PurchaseBook: Book not found.");
-    return false;
-}
-//Check customer balance
-BigInteger bookPrice = Storage.Get(Storage.CurrentContext, Key("Book_Price", bookId)).AsBigInteger();
-if (BalanceOf(buyerAddress) < bookPrice)
-{
-    Runtime.Log("PurchaseBook: Buyer has insufficient funds.");
-    return false;
-}
-//Transfer funds from customer account to event account
-Transfer(buyerAddress, bookOwnerAddress, bookPrice);
-//Update data in storage
-Storage.Put(Storage.CurrentContext, Key("Purchase_BuyerAddress", orderId), buyerAddress);
-Storage.Put(Storage.CurrentContext, Key("Purchase_BookId", orderId), bookId);
-Runtime.Log("PurchaseBook: Successfully purchased book.");
-return true;
 ```
 Lets briefly understand the above code:
 * Storage.Put is a key-value storage and is used to store data on the blockchain. It can be used for adding new data (by a new key) or updating an existing set of data (by using Storage.Put with an existing key).
