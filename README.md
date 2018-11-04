@@ -618,6 +618,7 @@ There are several ways to invoke a smart contract on Neo. For this tutorial weâ€
 [Blockchain.cs](https://github.com/jnlewis/neo-dapp-tutorial/blob/master/Sample/BookStoreApp/BookStore.Api/Contract/Blockchain.cs)
 
 4. Fill in the wallet private key and the contract script hash in the class variables at the top of the class file. For the purpose of this tutorial, we are going to hardcode these values. However, when creating your actual Dapp, these should be in a configurable settings and best kept securely.
+Note: The private key and script hash must be in hexadecimal format.
 ```c#
 //The private key of the wallet used to deploy the smart contract
 private static string privateKey = "";
