@@ -7,10 +7,10 @@ namespace BookStore.Api.Contract
 {
     public static class Blockchain
     {
-        //The private key of the wallet used to deploy the smart contract
+        //The private key of the wallet used to deploy the smart contract (In hex format)
         private static string privateKey = "";
 
-        //Get this when deploying your contract to the blockchain
+        //Get this when deploying your contract to the blockchain (In hex format)
         private static string contractScriptHash = ""; 
 
         public static bool InvokeScript(string method, object[] values)
