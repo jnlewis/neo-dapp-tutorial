@@ -63,7 +63,7 @@ Option 1 (**Running NEO private net**) gives you virtually unlimited GAS tokens,
 
 [Docket Private Network Container](https://hub.docker.com/r/cityofzion/neo-privatenet/)
 
-[How to Run NEO Private Net (Unofficial guide)](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
+[How to Run NEO Private Net](https://medium.com/proof-of-working/how-to-run-a-private-network-of-the-neo-blockchain-d83004557359)
 
 Option 2 (**Using NEO testnet environment**), which this tutorial will focus on, is a quick and easy way to get started. The downside is that you will need to request for GAS for test usage.
 You can request for GAS on the test net here:
